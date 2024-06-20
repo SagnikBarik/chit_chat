@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 
 import 'package:chit_chat/components/my_drawer.dart';
 
+final ChatService _chatService = ChatService();
+final AuthService _authService = AuthService();
+
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
-
-  final ChatService _chatService = ChatService();
-  final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -35,25 +35,33 @@ class HomeScreen extends StatelessWidget {
             return const Text("Loading...");
           }
           return ListView(
+            padding: const EdgeInsets.only(top: 10),
               children: snapshot.data!
-                  .map<Widget>((userData) => _buildUserListItem(userData, context))
+                  .map<Widget>(
+                      (userData) => _buildUserListItem(userData, context))
                   .toList());
         });
   }
 }
 
 Widget _buildUserListItem(Map<String, dynamic> userData, BuildContext context) {
-  return UserTile(
-    text: userData['name'],
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ChatScreen(
-            reciever: userData['name'],
+  if (userData["email"] != _authService.getCurrentUser()!.email) {
+    return UserTile(
+      text: userData['name'],
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChatScreen(
+              recieverEmail: userData['email'],
+              recieverID: userData['uid'],
+              recieverName: userData['name'],
+            ),
           ),
-        ),
-      );
-    },
-  );
+        );
+      },
+    );
+  } else {
+    return Container();
+  }
 }
