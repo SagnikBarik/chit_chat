@@ -15,12 +15,12 @@ class RegisterScreen extends StatelessWidget {
 
   RegisterScreen({super.key, required this.onTap});
 
-  void register(BuildContext context) {
+  void register(BuildContext context) async{
     final auth = AuthService();
 
     if (_passwordController.text == _confirmPasswordController.text) {
       try {
-        auth.registerWithEmailPassword(
+        await auth.registerWithEmailPassword(
           _emailController.text,
           _passwordController.text,
           _usernameController.text,

@@ -15,9 +15,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Home Screen"),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.grey,
       ),
       drawer: const MyDrawer(),
       body: _buildUserList(),

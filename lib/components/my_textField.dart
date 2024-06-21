@@ -20,13 +20,15 @@ class MyTextField extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.tertiary,
-          )),
+            borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.tertiary,
+            ),
+          ),
           focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-            color: Theme.of(context).colorScheme.primary,
-          )),
+            borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
           fillColor: Theme.of(context).colorScheme.secondary,
           filled: true,
           hintText: hintText,
